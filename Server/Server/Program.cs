@@ -1,10 +1,22 @@
+ using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using Entities.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+//Add ConnectionString
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("sqlConnection")));
+
+
+
+//Add custom service
+builder.Services.AddScoped<IProductService, ProductService>();
+
+//Add AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 
