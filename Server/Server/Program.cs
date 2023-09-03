@@ -1,4 +1,4 @@
- using BusinessLogic.Interfaces;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using Entities.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,9 +14,22 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Add custom service
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 //Add AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// Add Service Sessions
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+
+});
+
 
 builder.Services.AddControllers();
 
@@ -33,6 +46,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseSession();
+ 
 
 app.UseAuthorization();
 
