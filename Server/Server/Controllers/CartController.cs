@@ -48,7 +48,7 @@ namespace Server.Controllers
         }
 
 
-        [HttpDelete("Delete{id}")]
+        [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
             try

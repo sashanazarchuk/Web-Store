@@ -7,9 +7,9 @@ export interface IProduct{
 }
 
 export interface ICartItem{
-    ItemId:string;
+    itemId:string;
     cartId:string;
-    Quantity:number;
-    ProductId:number;
-    Product:IProduct
+    quantity:number;
+    productId:number;
+    product:IProduct
 }

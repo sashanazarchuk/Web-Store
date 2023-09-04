@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Interfaces;
 using Entities.Data;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 
 
@@ -70,7 +71,7 @@ namespace BusinessLogic.Services
         {
             ShoppingCartId = GetCartId();
 
-            return context.CartItem.Where(c => c.CartId == ShoppingCartId).ToList();
+            return context.CartItem.Include(c=>c.Product).Where(c => c.CartId == ShoppingCartId).ToList();
         }
 
         //Method to delete current product from cart
