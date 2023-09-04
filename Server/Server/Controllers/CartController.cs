@@ -16,7 +16,7 @@ namespace Server.Controllers
         }
 
 
-        [HttpPost("AddToCart{id}")]
+        [HttpPost("AddToCart/{id}")]
         public IActionResult AddToCart([FromRoute] int id)
         {
             try
